@@ -59,7 +59,10 @@ export function MovieListPage() {
 
   return (
     <section className="list-page">
-      <h1 className="page-title">Elenco Film</h1>
+      <h1 className="page-title">The Lord of the Rings</h1>
+      <p className="page-sub">
+        Risultati fissi da API · query=The Lord of the Rings · page=1 · max 20 items · senza filtri / paginazione
+      </p>
       <div className="movies-grid">
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />

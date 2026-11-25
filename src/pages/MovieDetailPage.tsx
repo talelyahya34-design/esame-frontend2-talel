@@ -64,7 +64,7 @@ export function MovieDetailPage() {
       <div className="detail-page">
         <p className="status-text error-text">{error}</p>
         <Link to="/" className="detail-btn">
-          Torna all'elenco
+          ← Torna all&apos;elenco
         </Link>
       </div>
     );
@@ -74,45 +74,67 @@ export function MovieDetailPage() {
     return null;
   }
 
+  const productionNames =
+    movie.production_companies?.map((company) => company.name).join(" · ") || "N/D";
+
   return (
     <section className="detail-page">
+      <div className="detail-top-bar">
+        <Link to="/" className="detail-btn">
+          ← Torna all&apos;elenco
+        </Link>
+      </div>
+
       <div className="detail-layout">
         <div className="detail-poster">
           {movie.poster_path ? (
             <img src={`${POSTER_BASE_URL}${movie.poster_path}`} alt={movie.title} />
           ) : (
-            <div className="poster-placeholder">Nessun poster</div>
+            <div className="poster-placeholder">Poster</div>
           )}
         </div>
 
         <div className="detail-info">
           <h1>{movie.title}</h1>
-          {movie.tagline && <p className="detail-tagline">{movie.tagline}</p>}
+          {movie.tagline && <p className="detail-tagline">&ldquo;{movie.tagline}&rdquo;</p>}
 
           <div className="detail-badges">
             <span>Uscita: {movie.release_date || "N/D"}</span>
-            <span>Voto: ★ {movie.vote_average.toFixed(1)}</span>
             <span>Durata: {movie.runtime ? `${movie.runtime} min` : "N/D"}</span>
+            <span>Voto: {movie.vote_average.toFixed(1)}</span>
+            {typeof movie.vote_count === "number" && (
+              <span>Voti: {movie.vote_count.toLocaleString("it-IT")}</span>
+            )}
+            {movie.status && <span>Stato: {movie.status}</span>}
+            {movie.original_language && (
+              <span>Lingua: {movie.original_language.toUpperCase()}</span>
+            )}
           </div>
 
-          <p className="detail-genres">
-            <strong>Generi:</strong>{" "}
-            {movie.genres.length > 0
-              ? movie.genres.map((g) => g.name).join(", ")
-              : "Nessun genere"}
-          </p>
+          <div className="detail-genres-box">
+            {movie.genres.length > 0 ? (
+              movie.genres.map((g) => (
+                <span key={g.id} className="genre-chip">
+                  {g.name}
+                </span>
+              ))
+            ) : (
+              <span className="genre-chip">Nessun genere</span>
+            )}
+          </div>
 
-          <p className="detail-overview">
-            {movie.overview || "Sinossi non disponibile."}
-          </p>
+          <div className="detail-section">
+            <h2 className="detail-section-title">TRAMA</h2>
+            <p className="detail-overview">
+              {movie.overview || "Sinossi non disponibile."}
+            </p>
+          </div>
+
+          <p className="detail-production">Produzione: {productionNames}</p>
         </div>
       </div>
 
-      <div>
-        <Link to="/" className="detail-btn">
-          Torna all'elenco
-        </Link>
-      </div>
+      <div className="wire-note">Wireframe statico.</div>
     </section>
   );
 }

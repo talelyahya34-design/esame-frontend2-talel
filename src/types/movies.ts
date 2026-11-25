@@ -1,10 +1,17 @@
 export type MovieListItem = {
   id: number;
   title: string;
+  original_title?: string;
   release_date: string;
   vote_average: number;
+  vote_count?: number;
   overview: string;
   poster_path: string | null;
+  backdrop_path?: string | null;
+};
+
+export type MovieCardProps = {
+  movie: MovieListItem;
 };
 
 export type SearchMoviesResponse = {
@@ -17,8 +24,8 @@ export type SearchMoviesResponse = {
 export type BelongsToCollection = {
   id: number;
   name: string;
-  poster_path: string;
-  backdrop_path: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
 };
 
 export type Genre = {
@@ -64,7 +71,7 @@ export type MovieDetail = {
   release_date: string;
   revenue: number;
   runtime: number;
-  softcore: boolean;
+  softcore?: boolean;
   spoken_languages: SpokenLanguage[];
   status: string;
   tagline: string;
@@ -72,8 +79,4 @@ export type MovieDetail = {
   video: boolean;
   vote_average: number;
   vote_count: number;
-};
-
-export type MovieCardProps = {
-  movie: MovieListItem;
 };

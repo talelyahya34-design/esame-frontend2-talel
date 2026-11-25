@@ -18,7 +18,7 @@ export function MovieCard({ movie }: MovieCardProps) {
         <h2 className="movie-title">{movie.title}</h2>
         <div className="movie-meta">
           <span>{movie.release_date || "Data N/D"}</span>
-          <span>★ {movie.vote_average.toFixed(1)}</span>
+          <span>Voto: {movie.vote_average.toFixed(1)}</span>
         </div>
         <p className="movie-overview">
           {movie.overview || "Sinossi non disponibile."}
